@@ -10,6 +10,8 @@ public class TankClient extends Frame{
     int x = 50;
     int y = 50;
 
+    Image offScreenImage = null;
+
     //0.3重写paint方法,这个方法不用调用，重画的时候会自己调用。
     @Override
     public void paint(Graphics g) {
@@ -20,6 +22,21 @@ public class TankClient extends Frame{
         g.setColor(c);//不要改变原来的前景色
 
         y += 5;
+    }
+
+    //0.4双缓冲技术
+    @Override
+    public void update(Graphics g) {
+        if(offScreenImage == null){
+            offScreenImage = this.createImage(800,600);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.black);
+        gOffScreen.fillRect(0,0,800,600);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage,0,0,null);
     }
 
     //0.1创建一个方法
