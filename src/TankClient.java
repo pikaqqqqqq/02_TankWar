@@ -31,10 +31,13 @@ public class TankClient extends Frame{
             offScreenImage = this.createImage(800,600);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
+
+        //擦除原画
         Color c = gOffScreen.getColor();
         gOffScreen.setColor(Color.black);
         gOffScreen.fillRect(0,0,800,600);
         gOffScreen.setColor(c);
+
         paint(gOffScreen);
         g.drawImage(offScreenImage,0,0,null);
     }
