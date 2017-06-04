@@ -10,4 +10,22 @@
     刷新频率太快
 解决方法：
     将所有的东西画在虚拟的图片上，一次性显示出来
+repaint（）：
+    先调用update（）方法，update（）在调用pain（），所以在update方法中做些操作就可以了    
+关键代码：
+    public void update(Graphics g) {
+        if(offScreenImage == null){
+            offScreenImage = this.createImage(800,600);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+
+        //擦除原画
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.black);
+        gOffScreen.fillRect(0,0,800,600);
+        gOffScreen.setColor(c);
+
+        paint(gOffScreen);
+        g.drawImage(offScreenImage,0,0,null);
+    }
 ```
