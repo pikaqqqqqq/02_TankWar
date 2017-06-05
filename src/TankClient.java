@@ -9,6 +9,8 @@ public class TankClient extends Frame{
 
     int x = 50;
     int y = 50;
+    public static final int GAME_HIGH = 600;
+    public static final int GAME_WIDTH = 800;
 
     Image offScreenImage = null;
 
@@ -28,14 +30,14 @@ public class TankClient extends Frame{
     @Override
     public void update(Graphics g) {
         if(offScreenImage == null){
-            offScreenImage = this.createImage(800,600);
+            offScreenImage = this.createImage(GAME_WIDTH,GAME_HIGH);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
 
         //擦除原画
         Color c = gOffScreen.getColor();
         gOffScreen.setColor(Color.black);
-        gOffScreen.fillRect(0,0,800,600);
+        gOffScreen.fillRect(0,0,GAME_WIDTH,GAME_HIGH);
         gOffScreen.setColor(c);
 
         paint(gOffScreen);
@@ -45,7 +47,7 @@ public class TankClient extends Frame{
     //0.1创建一个方法
     public void launchFrame(){
         setLocation(200,100);
-        setSize(800,600);
+        setSize(GAME_WIDTH,GAME_HIGH);
         //0.2设置窗口属性
         setTitle("TankWar");
         setResizable(false);//不让窗口改变大小
