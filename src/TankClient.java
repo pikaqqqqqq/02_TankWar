@@ -9,8 +9,8 @@ import java.awt.event.WindowEvent;
  */
 public class TankClient extends Frame {
 
-    int x = 50;
-    int y = 50;
+    Tank myTank = new Tank(50, 50);
+
     public static final int GAME_HIGH = 600;
     public static final int GAME_WIDTH = 800;
 
@@ -19,11 +19,7 @@ public class TankClient extends Frame {
     //0.3重写paint方法,这个方法不用调用，重画的时候会自己调用。
     @Override
     public void paint(Graphics g) {
-        //默认前景色为黑色
-        Color c = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x, y, 30, 30);//x,y,w,h
-        g.setColor(c);//不要改变原来的前景色
+        myTank.draw(g);
 
         //y += 5;
     }
@@ -86,4 +82,14 @@ public class TankClient extends Frame {
         }
     }
 
+    //0.6写程序要循序渐进，写一点测试一点
+    private class KeyMonitor extends KeyAdapter {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            myTank.KeyPressed(e);
+        }
+    }
+
+    //0.7增加100辆坦克到游戏中
 }
