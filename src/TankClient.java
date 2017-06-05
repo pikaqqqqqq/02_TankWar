@@ -89,6 +89,11 @@ public class TankClient extends Frame {
         public void keyPressed(KeyEvent e) {
             myTank.KeyPressed(e);
         }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            myTank.KeyReleased(e);
+        }
     }
 
     //0.7增加100辆坦克到游戏中

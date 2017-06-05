@@ -33,7 +33,7 @@ public class Tank {
         g.setColor(Color.RED);
         g.fillOval(x, y, 30, 30);//x,y,w,h
         g.setColor(c);//不要改变原来的前景色
-
+        move();
     }
 
     public void move() {
@@ -68,12 +68,10 @@ public class Tank {
                 break;
             case STOP:
                 break;
-
         }
     }
 
     public void KeyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
         //如果是八方向应该怎么写
 //        switch (key) {
 //            case KeyEvent.VK_LEFT:
@@ -90,6 +88,7 @@ public class Tank {
 //                break;
 //        }
         //0.8实现八方向操作
+        int key = e.getKeyCode();
         switch (key) {
             case KeyEvent.VK_LEFT:
                 bL = true;
@@ -105,38 +104,44 @@ public class Tank {
                 break;
         }
         locateDirection();
-        move();
+    }
+
+    public void KeyReleased(KeyEvent e) {
+        int key = e.getKeyCode();
+        switch (key) {
+            case KeyEvent.VK_LEFT:
+                bL = false;
+                break;
+            case KeyEvent.VK_UP:
+                bU = false;
+                break;
+            case KeyEvent.VK_RIGHT:
+                bR = false;
+                break;
+            case KeyEvent.VK_DOWN:
+                bD = false;
+                break;
+        }
+        locateDirection();
     }
 
     public void locateDirection() {
         if (bL && !bU && !bR && !bD) {
             dir = Direction.L;
-//            bL = false;
         } else if (bL && bU && !bR && !bD) {
             dir = Direction.LU;
-//            bL = false;
-//            bU = false;
         } else if (!bL && bU && !bR && !bD) {
             dir = Direction.U;
-//            bU = false;
         } else if (!bL && bU && bR && !bD) {
             dir = Direction.RU;
-//            bU = false;
-//            bR = false;
         } else if (!bL && !bU && bR && !bD) {
             dir = Direction.R;
-//            bR = false;
         } else if (!bL && !bU && bR && bD) {
             dir = Direction.RD;
-//            bR = false;
-//            bD = false;
         } else if (!bL && !bU && !bR && bD) {
             dir = Direction.D;
-//            bD = false;
         } else if (bL && !bU && !bR && bD) {
-            dir = Direction.LU;
-//            bD = false;
-//            bL = false;
+            dir = Direction.LD;
         } else if (!bL && !bU && !bR && !bD) {
             dir = Direction.STOP;
         }
