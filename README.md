@@ -30,3 +30,4 @@ repaint()：
         g.drawImage(offScreenImage,0,0,null);
     }
 ```
+* 0.6如果是八方向移动怎么写
