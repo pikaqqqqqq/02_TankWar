@@ -93,6 +93,7 @@ public class TankClient extends Frame {
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
 
+            //如果是八方向应该怎么写
             switch (key) {
                 case KeyEvent.VK_LEFT:
                     x -= 5;
@@ -108,18 +109,16 @@ public class TankClient extends Frame {
                     break;
             }
 
-            if (key == KeyEvent.VK_RIGHT) {
-                x += 5;
-            } else if (key == KeyEvent.VK_LEFT) {
-
-            }
-            if (key == KeyEvent.VK_UP) {
-
-            }
-
-            if (key == KeyEvent.VK_DOWN) {
-
-            }
+//            if (key == KeyEvent.VK_RIGHT) {
+//                x += 5;
+//            } else if (key == KeyEvent.VK_LEFT) {
+//                x -= 5;
+//            }
+//            if (key == KeyEvent.VK_UP) {
+//                y -= 5;
+//            }else if (key == KeyEvent.VK_DOWN) {
+//                y += 5;
+//            }
         }
     }
 }
