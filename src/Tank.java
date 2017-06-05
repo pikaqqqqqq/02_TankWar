@@ -71,6 +71,7 @@ public class Tank {
         }
     }
 
+    //0.8实现八方向操作
     public void KeyPressed(KeyEvent e) {
         //如果是八方向应该怎么写
 //        switch (key) {
@@ -87,7 +88,7 @@ public class Tank {
 //                y += 5;
 //                break;
 //        }
-        //0.8实现八方向操作
+
         int key = e.getKeyCode();
         switch (key) {
             case KeyEvent.VK_LEFT:
@@ -106,6 +107,7 @@ public class Tank {
         locateDirection();
     }
 
+    //0.8处理八方向行走bug
     public void KeyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
