@@ -86,39 +86,4 @@ public class TankClient extends Frame {
         }
     }
 
-    //0.6写程序要循序渐进，写一点测试一点
-    private class KeyMonitor extends KeyAdapter {
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            int key = e.getKeyCode();
-
-            //如果是八方向应该怎么写
-            switch (key) {
-                case KeyEvent.VK_LEFT:
-                    x -= 5;
-                    break;
-                case KeyEvent.VK_UP:
-                    y -= 5;
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    x += 5;
-                    break;
-                case KeyEvent.VK_DOWN:
-                    y += 5;
-                    break;
-            }
-
-//            if (key == KeyEvent.VK_RIGHT) {
-//                x += 5;
-//            } else if (key == KeyEvent.VK_LEFT) {
-//                x -= 5;
-//            }
-//            if (key == KeyEvent.VK_UP) {
-//                y -= 5;
-//            }else if (key == KeyEvent.VK_DOWN) {
-//                y += 5;
-//            }
-        }
-    }
 }
