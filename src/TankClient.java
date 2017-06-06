@@ -9,8 +9,8 @@ import java.awt.event.WindowEvent;
  */
 public class TankClient extends Frame {
 
-    Tank myTank = new Tank(50, 50);
-    Missile m = new Missile(50, 50, Tank.Direction.R);
+    Tank myTank = new Tank(50, 50, this);
+    Missile m = null;
 
     public static final int GAME_HIGH = 600;
     public static final int GAME_WIDTH = 800;
@@ -21,7 +21,9 @@ public class TankClient extends Frame {
     @Override
     public void paint(Graphics g) {
         myTank.draw(g);
-        m.draw(g);
+        if (m != null) {
+            m.draw(g);
+        }
         //y += 5;
     }
 

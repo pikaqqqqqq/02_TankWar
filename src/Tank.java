@@ -9,6 +9,8 @@ public class Tank {
     public static final int XSPEED = 5;
     public static final int YSPEED = 5;
 
+    TankClient tc;
+
     private int x;
     private int y;
 
@@ -25,6 +27,12 @@ public class Tank {
     public Tank(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    //1.1持有对方引用
+    public Tank(int x,int y,TankClient tc){
+        this(x,y);//调用上面的构造方法
+        this.tc = tc;
     }
 
     public void draw(Graphics g) {
@@ -91,6 +99,9 @@ public class Tank {
 
         int key = e.getKeyCode();
         switch (key) {
+            case KeyEvent.VK_CONTROL:
+                tc.m = fire();
+                break;
             case KeyEvent.VK_LEFT:
                 bL = true;
                 break;
@@ -105,6 +116,11 @@ public class Tank {
                 break;
         }
         locateDirection();
+    }
+
+    public Missile fire(){
+        Missile m = new Missile(x, y, dir);
+        return  m;
     }
 
     //0.8处理八方向行走bug
