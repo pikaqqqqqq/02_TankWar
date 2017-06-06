@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 public class Tank {
     public static final int XSPEED = 5;
     public static final int YSPEED = 5;
+    public static final int WIDTH = 30;
+    public static final int HEIGHT = 30;
 
     TankClient tc;
 
@@ -39,7 +41,7 @@ public class Tank {
         //默认前景色为黑色
         Color c = g.getColor();
         g.setColor(Color.RED);
-        g.fillOval(x, y, 30, 30);//x,y,w,h
+        g.fillOval(x, y, WIDTH, HEIGHT);//x,y,w,h
         g.setColor(c);//不要改变原来的前景色
         move();
     }
@@ -119,6 +121,8 @@ public class Tank {
     }
 
     public Missile fire(){
+        int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
+        int y = this.y + Tank.HEIGHT/2 - Missile.WIDTH/2;
         Missile m = new Missile(x, y, dir);
         return  m;
     }

@@ -6,8 +6,10 @@ import java.awt.*;
 
 //1.0添加子弹类
 public class Missile {
-    public static final int XSPEED = 8;
-    public static final int YSPEED = 8;
+    public static final int XSPEED = 10;
+    public static final int YSPEED = 10;
+    public static final int WIDTH = 10;
+    public static final int HEIGHT = 10;
 
     private int x;
     private int y;
@@ -22,7 +24,7 @@ public class Missile {
     public void draw(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.yellow);
-        g.fillOval(x, y, 10, 10);//x,y,w,h
+        g.fillOval(x, y, WIDTH, HEIGHT);//x,y,w,h
         g.setColor(c);
         move();
     }
