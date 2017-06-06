@@ -19,6 +19,7 @@ public class Tank {
     enum Direction {L, LU, U, RU, R, RD, D, LD, STOP}//枚举类型
 
     private Direction dir = Direction.STOP;
+    private Direction ptDir = Direction.D;
 
     private boolean bL = false;
     private boolean bU = false;
@@ -32,8 +33,8 @@ public class Tank {
     }
 
     //1.1持有对方引用
-    public Tank(int x,int y,TankClient tc){
-        this(x,y);//调用上面的构造方法
+    public Tank(int x, int y, TankClient tc) {
+        this(x, y);//调用上面的构造方法
         this.tc = tc;
     }
 
@@ -43,6 +44,33 @@ public class Tank {
         g.setColor(Color.RED);
         g.fillOval(x, y, WIDTH, HEIGHT);//x,y,w,h
         g.setColor(c);//不要改变原来的前景色
+
+        switch (ptDir) {
+            case L:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y + Tank.HEIGHT / 2);
+                break;
+            case LU:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y);
+                break;
+            case U:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH / 2, y);
+                break;
+            case RU:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + WIDTH, y);
+                break;
+            case R:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + WIDTH, y + Tank.HEIGHT / 2);
+                break;
+            case RD:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + WIDTH, y + Tank.HEIGHT);
+                break;
+            case D:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + WIDTH / 2, y + Tank.HEIGHT);
+                break;
+            case LD:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y + Tank.HEIGHT);
+                break;
+        }
         move();
     }
 
@@ -78,6 +106,9 @@ public class Tank {
                 break;
             case STOP:
                 break;
+        }
+        if (this.dir != Direction.STOP) {
+            this.ptDir = this.dir;
         }
     }
 
@@ -120,11 +151,11 @@ public class Tank {
         locateDirection();
     }
 
-    public Missile fire(){
-        int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
-        int y = this.y + Tank.HEIGHT/2 - Missile.WIDTH/2;
-        Missile m = new Missile(x, y, dir);
-        return  m;
+    public Missile fire() {
+        int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
+        int y = this.y + Tank.HEIGHT / 2 - Missile.WIDTH / 2;
+        Missile m = new Missile(x, y, ptDir);
+        return m;
     }
 
     //0.8处理八方向行走bug
