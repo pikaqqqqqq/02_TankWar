@@ -24,7 +24,7 @@ public class TankClient extends Frame {
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.white);
-        g.drawString("missiles.size():" + missiles.size(), 10, 50);
+        g.drawString("missiles.size():" + missiles.size(), 10, 50);//1.3如何在界面上画字符串
         g.setColor(c);//不要改变原来的前景色
 
         for (int i = 0; i < missiles.size(); i++) {
