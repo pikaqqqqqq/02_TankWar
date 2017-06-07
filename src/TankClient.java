@@ -3,6 +3,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by think on 2017/6/4.
@@ -10,7 +12,7 @@ import java.awt.event.WindowEvent;
 public class TankClient extends Frame {
 
     Tank myTank = new Tank(50, 50, this);
-    Missile m = null;
+    List<Missile> missiles = new ArrayList<Missile>();
 
     public static final int GAME_HIGH = 600;
     public static final int GAME_WIDTH = 800;
@@ -20,10 +22,16 @@ public class TankClient extends Frame {
     //0.3重写paint方法,这个方法不用调用，重画的时候会自己调用。
     @Override
     public void paint(Graphics g) {
-        myTank.draw(g);
-        if (m != null) {
+        Color c = g.getColor();
+        g.setColor(Color.white);
+        g.drawString("missiles.size():" + missiles.size(), 10, 50);
+        g.setColor(c);//不要改变原来的前景色
+
+        for (int i = 0; i < missiles.size(); i++) {
+            Missile m = missiles.get(i);
             m.draw(g);
         }
+        myTank.draw(g);
         //y += 5;
     }
 
