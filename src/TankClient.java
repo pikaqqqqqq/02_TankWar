@@ -14,7 +14,7 @@ public class TankClient extends Frame {
     Tank myTank = new Tank(50, 50, this);
     List<Missile> missiles = new ArrayList<Missile>();
 
-    public static final int GAME_HIGH = 600;
+    public static final int GAME_HEIGHT = 600;
     public static final int GAME_WIDTH = 800;
 
     Image offScreenImage = null;
@@ -30,6 +30,8 @@ public class TankClient extends Frame {
         for (int i = 0; i < missiles.size(); i++) {
             Missile m = missiles.get(i);
             m.draw(g);
+            //if(!m.isLive()) missiles.remove(m);//1.3另一种方法
+            //else m.draw(g);
         }
         myTank.draw(g);
         //y += 5;
@@ -39,14 +41,14 @@ public class TankClient extends Frame {
     @Override
     public void update(Graphics g) {
         if (offScreenImage == null) {
-            offScreenImage = this.createImage(GAME_WIDTH, GAME_HIGH);
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
 
         //擦除原画
         Color c = gOffScreen.getColor();
         gOffScreen.setColor(Color.black);
-        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HIGH);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
         gOffScreen.setColor(c);
 
         paint(gOffScreen);
@@ -56,7 +58,7 @@ public class TankClient extends Frame {
     //0.1创建一个方法
     public void launchFrame() {
         setLocation(200, 100);
-        setSize(GAME_WIDTH, GAME_HIGH);
+        setSize(GAME_WIDTH, GAME_HEIGHT);
         //0.2设置窗口属性
         setTitle("TankWar");
         setResizable(false);//不让窗口改变大小

@@ -15,10 +15,19 @@ public class Missile {
     private int y;
     private Tank.Direction dir;
 
+    private boolean live = true;
+
+    TankClient tc;
+
     public Missile(int x, int y, Tank.Direction dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+    }
+
+    public Missile(int x, int y, Tank.Direction dir,TankClient tc){
+        this(x,y,dir);
+        this.tc = tc;
     }
 
     public void draw(Graphics g) {
@@ -60,5 +69,19 @@ public class Missile {
                 y += YSPEED;
                 break;
         }
+
+        if (x < 0 || y < 0 || x > TankClient.GAME_WIDTH || y > TankClient.GAME_HEIGHT) {
+            live = false;
+            tc.missiles.remove(this);//
+        }
     }
+
+    public boolean isLive() {
+        return live;
+    }
+
+    public void setLive(boolean live) {
+        this.live = live;
+    }
+
 }
