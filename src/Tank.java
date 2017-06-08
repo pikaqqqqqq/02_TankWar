@@ -110,6 +110,13 @@ public class Tank {
         if (this.dir != Direction.STOP) {
             this.ptDir = this.dir;
         }
+
+        //1.4.1坦克不能出界
+        if (x < 0) x = 0;
+        if (y < 30) y = 30;
+        if (x > TankClient.GAME_WIDTH - Tank.WIDTH) x = TankClient.GAME_WIDTH - Tank.WIDTH;
+        if (y > TankClient.GAME_HEIGHT - Tank.HEIGHT) y = TankClient.GAME_HEIGHT - Tank.HEIGHT;
+
     }
 
     //0.8实现八方向操作
