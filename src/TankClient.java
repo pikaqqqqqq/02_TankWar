@@ -74,10 +74,6 @@ public class TankClient extends Frame {
         this.addKeyListener(new KeyMonitor());
     }
 
-    public static void main(String[] args) {
-        new TankClient().launchFrame();
-    }
-
     //0.4电影怎么动的，就模拟怎么动
     //0.4可能会出现闪烁问题，使用双缓冲解决
     private class PaintTread implements Runnable {
@@ -111,4 +107,8 @@ public class TankClient extends Frame {
     }
 
     //0.7增加100辆坦克到游戏中
+
+    public static void main(String[] args) {
+        new TankClient().launchFrame();
+    }
 }
