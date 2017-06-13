@@ -25,12 +25,14 @@ public class Missile {
         this.dir = dir;
     }
 
-    public Missile(int x, int y, Tank.Direction dir,TankClient tc){
-        this(x,y,dir);
+    public Missile(int x, int y, Tank.Direction dir, TankClient tc) {
+        this(x, y, dir);
         this.tc = tc;
     }
 
     public void draw(Graphics g) {
+        if (!live) tc.missiles.remove(this);
+
         Color c = g.getColor();
         g.setColor(Color.yellow);
         g.fillOval(x, y, WIDTH, HEIGHT);//x,y,w,h
@@ -72,9 +74,23 @@ public class Missile {
 
         if (x < 0 || y < 0 || x > TankClient.GAME_WIDTH || y > TankClient.GAME_HEIGHT) {
             live = false;
-            tc.missiles.remove(this);//
         }
     }
+
+    public Rectangle getRect() {
+        return new Rectangle(x, y, WIDTH, HEIGHT);
+    }
+
+    //一颗子弹击中敌人坦克
+    public boolean hitTank(Tank t) {
+        if (this.getRect().intersects(t.getRect()) && t.isLive()) {
+            t.setLive(false);
+            this.live = false;
+            return true;
+        }
+        return false;
+    }
+
 
     public boolean isLive() {
         return live;

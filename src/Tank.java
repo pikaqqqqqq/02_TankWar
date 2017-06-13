@@ -16,6 +16,8 @@ public class Tank {
     //1.5添加敌方坦克,因为都是坦克所以不需要新建一个敌人类
     private boolean good;
 
+    private boolean live = true;
+
     private int x;
     private int y;
 
@@ -43,6 +45,8 @@ public class Tank {
     }
 
     public void draw(Graphics g) {
+        if(!live) return;
+
         //默认前景色为黑色
         Color c = g.getColor();
         if(good) g.setColor(Color.RED);
@@ -211,6 +215,18 @@ public class Tank {
             dir = Direction.STOP;
         }
 
+    }
+
+    public Rectangle getRect() {
+        return new Rectangle(x, y, WIDTH, HEIGHT);
+    }
+
+    public boolean isLive() {
+        return live;
+    }
+
+    public void setLive(boolean live) {
+        this.live = live;
     }
 
 }
