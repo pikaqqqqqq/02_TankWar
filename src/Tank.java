@@ -13,6 +13,9 @@ public class Tank {
 
     TankClient tc;
 
+    //1.5添加敌方坦克,因为都是坦克所以不需要新建一个敌人类
+    private boolean good;
+
     private int x;
     private int y;
 
@@ -27,21 +30,23 @@ public class Tank {
     private boolean bD = false;
 
 
-    public Tank(int x, int y) {
+    public Tank(int x, int y, boolean good) {
         this.x = x;
         this.y = y;
+        this.good = good;
     }
 
     //1.1持有对方引用
-    public Tank(int x, int y, TankClient tc) {
-        this(x, y);//调用上面的构造方法
+    public Tank(int x, int y, boolean good, TankClient tc) {
+        this(x, y, good);//调用上面的构造方法
         this.tc = tc;
     }
 
     public void draw(Graphics g) {
         //默认前景色为黑色
         Color c = g.getColor();
-        g.setColor(Color.RED);
+        if(good) g.setColor(Color.RED);
+        else g.setColor(Color.white);
         g.fillOval(x, y, WIDTH, HEIGHT);//x,y,w,h
         g.setColor(c);//不要改变原来的前景色
 
