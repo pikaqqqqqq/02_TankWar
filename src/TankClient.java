@@ -17,6 +17,7 @@ public class TankClient extends Frame {
     List<Missile> missiles = new ArrayList<Missile>();
     List<Explode> explodes = new ArrayList<Explode>();
     List<Tank> tanks = new ArrayList<Tank>();
+    Wall w = new Wall(200,400,250,30,this);
 
     public static final int GAME_HEIGHT = 600;
     public static final int GAME_WIDTH = 800;
@@ -53,6 +54,7 @@ public class TankClient extends Frame {
             t.draw(g);
         }
 
+        w.draw(g);
         myTank.draw(g);
         //enemyTank.draw(g);
         //y += 5;
