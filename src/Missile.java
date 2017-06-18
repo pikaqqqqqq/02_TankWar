@@ -94,9 +94,9 @@ public class Missile {
         return false;
     }
 
-    public boolean hitTanks(List<Tank> tanks){
-        for (int i = 0; i < tanks.size(); i++){
-            if(hitTank(tanks.get(i))){
+    public boolean hitTanks(List<Tank> tanks) {
+        for (int i = 0; i < tanks.size(); i++) {
+            if (hitTank(tanks.get(i))) {
                 return true;
             }
         }

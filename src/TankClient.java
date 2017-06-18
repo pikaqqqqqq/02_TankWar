@@ -30,6 +30,7 @@ public class TankClient extends Frame {
         g.setColor(Color.white);
         g.drawString("missiles.size():" + missiles.size(), 10, 50);//1.3如何在界面上画字符串
         g.drawString("explodes.size():" + explodes.size(), 10, 70);
+        g.drawString("tanks.size():" + tanks.size(), 10, 90);
         g.setColor(c);//不要改变原来的前景色
 
         for (int i = 0; i < missiles.size(); i++) {

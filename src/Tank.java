@@ -45,7 +45,12 @@ public class Tank {
     }
 
     public void draw(Graphics g) {
-        if(!live) return;
+        if(!live) {
+            if(!good){
+                tc.tanks.remove(this);
+            }
+            return;
+        }
 
         //默认前景色为黑色
         Color c = g.getColor();
