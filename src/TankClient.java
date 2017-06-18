@@ -17,7 +17,7 @@ public class TankClient extends Frame {
     List<Missile> missiles = new ArrayList<Missile>();
     List<Explode> explodes = new ArrayList<Explode>();
     List<Tank> tanks = new ArrayList<Tank>();
-    Wall w = new Wall(200,400,250,30,this);
+    Wall w = new Wall(200,200,250,30,this);
 
     public static final int GAME_HEIGHT = 600;
     public static final int GAME_WIDTH = 800;
@@ -39,6 +39,7 @@ public class TankClient extends Frame {
             //m.hitTank(enemyTank);
             m.hitTank(myTank);
             m.hitTanks(tanks);
+            m.hitWall(w);
             m.draw(g);
             //if(!m.isLive()) missiles.remove(m);//1.3另一种方法
             //else m.draw(g);
@@ -51,6 +52,7 @@ public class TankClient extends Frame {
 
         for (int i = 0; i < tanks.size(); i++) {
             Tank t = tanks.get(i);
+            t.collidesWithWall(w);
             t.draw(g);
         }
 

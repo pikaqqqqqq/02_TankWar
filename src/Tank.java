@@ -22,6 +22,9 @@ public class Tank {
 
     private int x;
     private int y;
+    private int oldX;
+    private int oldY;
+
 
     private static Random r = new Random();//1.9随机数产生器
 
@@ -40,6 +43,8 @@ public class Tank {
     public Tank(int x, int y, boolean good) {
         this.x = x;
         this.y = y;
+        this.oldX = x;
+        this.oldY = y;
         this.good = good;
     }
 
@@ -110,6 +115,10 @@ public class Tank {
     }
 
     public void move() {
+
+        this.oldX = x;
+        this.oldY = y;
+
         switch (dir) {
             case L:
                 x -= XSPEED;
@@ -246,6 +255,19 @@ public class Tank {
 
     public Rectangle getRect() {
         return new Rectangle(x, y, WIDTH, HEIGHT);
+    }
+
+    private void stay(){
+        x = oldX;
+        y = oldY;
+    }
+
+    public  boolean collidesWithWall(Wall w){//第三人称问题
+        if(this.live && this.getRect().intersects(w.getRect())){
+            stay();
+            return true;
+        }
+        return false;
     }
 
     public boolean isLive() {
