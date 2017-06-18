@@ -13,8 +13,9 @@ public class TankClient extends Frame {
 
     Tank myTank = new Tank(50, 50, true, this);
     Tank enemyTank = new Tank(100, 100, false, this);
-    Explode e = new Explode(70,90,this);
+    Explode e = new Explode(70, 90, this);
     List<Missile> missiles = new ArrayList<Missile>();
+    List<Explode> explodes = new ArrayList<Explode>();
 
     public static final int GAME_HEIGHT = 600;
     public static final int GAME_WIDTH = 800;
@@ -27,6 +28,7 @@ public class TankClient extends Frame {
         Color c = g.getColor();
         g.setColor(Color.white);
         g.drawString("missiles.size():" + missiles.size(), 10, 50);//1.3如何在界面上画字符串
+        g.drawString("explodes.size():" + explodes.size(), 10, 70);
         g.setColor(c);//不要改变原来的前景色
 
         for (int i = 0; i < missiles.size(); i++) {
@@ -37,7 +39,11 @@ public class TankClient extends Frame {
             //else m.draw(g);
         }
 
-        e.draw(g);
+        for (int i = 0; i < explodes.size(); i++) {
+            Explode e = explodes.get(i);
+            e.draw(g);
+        }
+
         myTank.draw(g);
         enemyTank.draw(g);
         //y += 5;

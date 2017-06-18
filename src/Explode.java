@@ -22,7 +22,10 @@ public class Explode {
     }
 
     public void draw(Graphics g){
-        if(!live) return;
+        if(!live) {
+            tc.explodes.remove(this);
+            return;
+        }
 
         if(step == diameter.length){
             live = false;
@@ -36,4 +39,5 @@ public class Explode {
 
         step++;
     }
+
 }
