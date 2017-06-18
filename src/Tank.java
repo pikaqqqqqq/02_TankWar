@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 /**
  * Created by think on 2017/6/5.
@@ -8,6 +9,7 @@ import java.awt.event.KeyEvent;
 public class Tank {
     public static final int XSPEED = 5;
     public static final int YSPEED = 5;
+
     public static final int WIDTH = 30;
     public static final int HEIGHT = 30;
 
@@ -20,6 +22,8 @@ public class Tank {
 
     private int x;
     private int y;
+
+    private static Random r = new Random();//1.9随机数产生器
 
     enum Direction {L, LU, U, RU, R, RD, D, LD, STOP}//枚举类型
 
@@ -39,14 +43,15 @@ public class Tank {
     }
 
     //1.1持有对方引用
-    public Tank(int x, int y, boolean good, TankClient tc) {
+    public Tank(int x, int y, boolean good, Direction dir, TankClient tc) {
         this(x, y, good);//调用上面的构造方法
         this.tc = tc;
+        this.dir = dir;
     }
 
     public void draw(Graphics g) {
-        if(!live) {
-            if(!good){
+        if (!live) {
+            if (!good) {
                 tc.tanks.remove(this);
             }
             return;
@@ -54,7 +59,7 @@ public class Tank {
 
         //默认前景色为黑色
         Color c = g.getColor();
-        if(good) g.setColor(Color.RED);
+        if (good) g.setColor(Color.RED);
         else g.setColor(Color.white);
         g.fillOval(x, y, WIDTH, HEIGHT);//x,y,w,h
         g.setColor(c);//不要改变原来的前景色
@@ -86,6 +91,12 @@ public class Tank {
                 break;
         }
         move();
+
+        if (!good) {
+            Direction[] dirs = Direction.values();
+            int rn = r.nextInt(dirs.length);
+            this.dir = dirs[rn];
+        }
     }
 
     public void move() {
