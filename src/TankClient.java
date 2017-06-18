@@ -12,10 +12,11 @@ import java.util.List;
 public class TankClient extends Frame {
 
     Tank myTank = new Tank(50, 50, true, this);
-    Tank enemyTank = new Tank(100, 100, false, this);
+    //Tank enemyTank = new Tank(100, 100, false, this);
     Explode e = new Explode(70, 90, this);
     List<Missile> missiles = new ArrayList<Missile>();
     List<Explode> explodes = new ArrayList<Explode>();
+    List<Tank> tanks = new ArrayList<Tank>();
 
     public static final int GAME_HEIGHT = 600;
     public static final int GAME_WIDTH = 800;
@@ -33,7 +34,8 @@ public class TankClient extends Frame {
 
         for (int i = 0; i < missiles.size(); i++) {
             Missile m = missiles.get(i);
-            m.hitTank(enemyTank);
+            //m.hitTank(enemyTank);
+            m.hitTanks(tanks);
             m.draw(g);
             //if(!m.isLive()) missiles.remove(m);//1.3另一种方法
             //else m.draw(g);
@@ -44,8 +46,13 @@ public class TankClient extends Frame {
             e.draw(g);
         }
 
+        for (int i = 0; i < tanks.size(); i++) {
+            Tank t = tanks.get(i);
+            t.draw(g);
+        }
+
         myTank.draw(g);
-        enemyTank.draw(g);
+        //enemyTank.draw(g);
         //y += 5;
     }
 
@@ -69,6 +76,12 @@ public class TankClient extends Frame {
 
     //0.1创建一个方法
     public void launchFrame() {
+
+        //1.8窗口显示出来以前，添加敌方坦克
+        for (int i = 0; i < 10; i++) {
+            tanks.add(new Tank(100 + 50 * (i + 1), 90, false, this));
+        }
+
         setLocation(200, 100);
         setSize(GAME_WIDTH, GAME_HEIGHT);
         //0.2设置窗口属性
