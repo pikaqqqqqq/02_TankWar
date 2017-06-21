@@ -42,6 +42,8 @@ public class Tank {
 
     private int step = r.nextInt(12) + 3;
 
+    private BloodBar bb = new BloodBar();
+
     public Tank(int x, int y, boolean good) {
         this.x = x;
         this.y = y;
@@ -71,6 +73,10 @@ public class Tank {
         else g.setColor(Color.white);
         g.fillOval(x, y, WIDTH, HEIGHT);//x,y,w,h
         g.setColor(c);//不要改变原来的前景色
+
+        if(good){
+            bb.draw(g);
+        }
 
         switch (ptDir) {
             case L:
@@ -112,7 +118,6 @@ public class Tank {
             if (r.nextInt(40) > 37) {
                 this.fire();
             }
-
         }
     }
 
@@ -323,5 +328,16 @@ public class Tank {
 
     public void setLife(int life) {
         this.life = life;
+    }
+
+    private class BloodBar{
+        public  void draw(Graphics g){
+            Color c = g.getColor();
+            g.setColor(Color.red);
+            g.drawRect(x, y - 10, WIDTH, 5);
+            int w = WIDTH * life/100;
+            g.fillRect(x, y - 10, w, 5);
+            g.setColor(c);
+        }
     }
 }
