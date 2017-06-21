@@ -20,6 +20,7 @@ public class Tank {
     private boolean good;
 
     private boolean live = true;
+    private int life = 100;
 
     private int x;
     private int y;
@@ -314,5 +315,13 @@ public class Tank {
 
     public boolean isGood() {
         return good;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
     }
 }
