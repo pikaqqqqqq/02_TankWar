@@ -189,6 +189,12 @@ public class Tank {
 //        }
         int key = e.getKeyCode();
         switch (key) {
+            case KeyEvent.VK_F2:
+                if(!live){
+                    live = true;
+                    life = 100;
+                }
+                break;
             case KeyEvent.VK_CONTROL:
                 fire();
                 break;

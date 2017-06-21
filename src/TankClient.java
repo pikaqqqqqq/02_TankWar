@@ -36,6 +36,12 @@ public class TankClient extends Frame {
         g.drawString("tanks.getLife():" + myTank.getLife(), 10, 110);
         g.setColor(c);//不要改变原来的前景色
 
+        if(tanks.size() <= 0){
+            for (int i = 0; i < 5; i++) {
+                tanks.add(new Tank(100 + 50 * (i + 1), 90, false, Tank.Direction.D, this));
+            }
+        }
+
         for (int i = 0; i < missiles.size(); i++) {
             Missile m = missiles.get(i);
             //m.hitTank(enemyTank);
