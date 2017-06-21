@@ -14,20 +14,20 @@ public class Missile {
 
     private int x;
     private int y;
-    private Tank.Direction dir;
+    private Direction dir;
 
     private boolean live = true;
     private boolean good;
 
     TankClient tc;
 
-    public Missile(int x, int y, Tank.Direction dir) {
+    public Missile(int x, int y, Direction dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
     }
 
-    public Missile(int x, int y, boolean good, Tank.Direction dir, TankClient tc) {
+    public Missile(int x, int y, boolean good, Direction dir, TankClient tc) {
         this(x, y, dir);
         this.tc = tc;
         this.good = good;
@@ -37,7 +37,8 @@ public class Missile {
         if (!live) tc.missiles.remove(this);
 
         Color c = g.getColor();
-        g.setColor(Color.yellow);
+        if(good) g.setColor(Color.red);
+        else g.setColor(Color.yellow);
         g.fillOval(x, y, WIDTH, HEIGHT);//x,y,w,h
         g.setColor(c);
         move();

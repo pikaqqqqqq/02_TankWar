@@ -30,7 +30,7 @@ public class Tank {
 
     private static Random r = new Random();//1.9随机数产生器
 
-    enum Direction {L, LU, U, RU, R, RD, D, LD, STOP}//枚举类型
+    //enum Direction {L, LU, U, RU, R, RD, D, LD, STOP}//枚举类型
 
     private Direction dir = Direction.STOP;
     private Direction ptDir = Direction.D;
@@ -189,6 +189,12 @@ public class Tank {
 //        }
         int key = e.getKeyCode();
         switch (key) {
+            case KeyEvent.VK_F2:
+                if(!live){
+                    life = 100;
+                    live = true;
+                }
+                break;
             case KeyEvent.VK_CONTROL:
                 fire();
                 break;

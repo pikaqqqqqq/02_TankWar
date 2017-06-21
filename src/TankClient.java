@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class TankClient extends Frame {
 
-    Tank myTank = new Tank(50, 50, true, Tank.Direction.STOP, this);
+    Tank myTank = new Tank(50, 50, true, Direction.STOP, this);
     //Tank enemyTank = new Tank(100, 100, false, this);
     Explode e = new Explode(70, 90, this);
     List<Missile> missiles = new ArrayList<Missile>();
@@ -35,6 +35,12 @@ public class TankClient extends Frame {
         g.drawString("tanks.size():" + tanks.size(), 10, 90);
         g.drawString("tanks.getLife():" + myTank.getLife(), 10, 110);
         g.setColor(c);//不要改变原来的前景色
+
+        if(tanks.size() <= 0){
+            for (int i = 0; i < 5; i++) {
+                tanks.add(new Tank(100 + 50 * (i + 1), 90, false, Direction.D, this));
+            }
+        }
 
         for (int i = 0; i < missiles.size(); i++) {
             Missile m = missiles.get(i);
@@ -90,7 +96,7 @@ public class TankClient extends Frame {
 
         //1.8窗口显示出来以前，添加敌方坦克
         for (int i = 0; i < 10; i++) {
-            tanks.add(new Tank(100 + 50 * (i + 1), 90, false, Tank.Direction.D, this));
+            tanks.add(new Tank(100 + 50 * (i + 1), 90, false, Direction.D, this));
         }
 
         setLocation(200, 100);
