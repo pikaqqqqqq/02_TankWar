@@ -236,6 +236,15 @@ public class Tank {
         }
     }
 
+    public boolean eatBlood(Blood b){
+        if(this.live && b.isLive() && this.getRect().intersects(b.getRect())){
+            this.life = 100;
+            b.setLive(false);
+            return true;
+        }
+        return false;
+    }
+
     //0.8处理八方向行走bug
     public void KeyReleased(KeyEvent e) {
         int key = e.getKeyCode();
