@@ -55,14 +55,14 @@ public class Tank {
          * 静态代码区，最适合用于一些变量的初始化
          */
         tankImages = new Image[]{
-                tk.getImage(Explode.class.getClassLoader().getResource("images/tankL.jpg")),
-                tk.getImage(Explode.class.getClassLoader().getResource("images/tankLU.jpg")),
-                tk.getImage(Explode.class.getClassLoader().getResource("images/tankU.jpg")),
-                tk.getImage(Explode.class.getClassLoader().getResource("images/tankRU.png")),
-                tk.getImage(Explode.class.getClassLoader().getResource("images/tankR.png")),
-                tk.getImage(Explode.class.getClassLoader().getResource("images/tankRD.png")),
-                tk.getImage(Explode.class.getClassLoader().getResource("images/tankD.jpg")),
-                tk.getImage(Explode.class.getClassLoader().getResource("images/tankLD.jpg")),
+                tk.getImage(Tank.class.getClassLoader().getResource("images/tankL.jpg")),
+                tk.getImage(Tank.class.getClassLoader().getResource("images/tankLU.jpg")),
+                tk.getImage(Tank.class.getClassLoader().getResource("images/tankU.jpg")),
+                tk.getImage(Tank.class.getClassLoader().getResource("images/tankRU.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("images/tankR.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("images/tankRD.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("images/tankD.jpg")),
+                tk.getImage(Tank.class.getClassLoader().getResource("images/tankLD.jpg")),
         };
         imgs.put("L",tankImages[0]);
         imgs.put("LU",tankImages[1]);
