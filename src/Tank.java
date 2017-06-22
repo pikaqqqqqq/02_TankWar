@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -11,8 +13,8 @@ public class Tank {
     public static final int XSPEED = 5;
     public static final int YSPEED = 5;
 
-    public static final int WIDTH = 30;
-    public static final int HEIGHT = 30;
+    public static final int WIDTH = 60;
+    public static final int HEIGHT = 60;
 
     TankClient tc;
 
@@ -44,6 +46,34 @@ public class Tank {
 
     private BloodBar bb = new BloodBar();
 
+    private static Toolkit tk = Toolkit.getDefaultToolkit();
+    private static Image[] tankImages = null;
+    private static Map<String,Image> imgs = new HashMap<String,Image>();
+
+    static {
+        /**静态执行一段代码，当这个class第一次被loader到内存里，首先执行的一段代码，这种用法更有优势，可以直接执行一句语句
+         * 静态代码区，最适合用于一些变量的初始化
+         */
+        tankImages = new Image[]{
+                tk.getImage(Explode.class.getClassLoader().getResource("images/tankL.jpg")),
+                tk.getImage(Explode.class.getClassLoader().getResource("images/tankLU.jpg")),
+                tk.getImage(Explode.class.getClassLoader().getResource("images/tankU.jpg")),
+                tk.getImage(Explode.class.getClassLoader().getResource("images/tankRU.png")),
+                tk.getImage(Explode.class.getClassLoader().getResource("images/tankR.png")),
+                tk.getImage(Explode.class.getClassLoader().getResource("images/tankRD.png")),
+                tk.getImage(Explode.class.getClassLoader().getResource("images/tankD.jpg")),
+                tk.getImage(Explode.class.getClassLoader().getResource("images/tankLD.jpg")),
+        };
+        imgs.put("L",tankImages[0]);
+        imgs.put("LU",tankImages[1]);
+        imgs.put("U",tankImages[2]);
+        imgs.put("RU",tankImages[3]);
+        imgs.put("R",tankImages[4]);
+        imgs.put("RD",tankImages[5]);
+        imgs.put("D",tankImages[6]);
+        imgs.put("LD",tankImages[7]);
+    }
+
     public Tank(int x, int y, boolean good) {
         this.x = x;
         this.y = y;
@@ -67,41 +97,34 @@ public class Tank {
             return;
         }
 
-        //默认前景色为黑色
-        Color c = g.getColor();
-        if (good) g.setColor(Color.RED);
-        else g.setColor(Color.white);
-        g.fillOval(x, y, WIDTH, HEIGHT);//x,y,w,h
-        g.setColor(c);//不要改变原来的前景色
-
         if(good){
             bb.draw(g);
         }
 
         switch (ptDir) {
             case L:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y + Tank.HEIGHT / 2);
+                g.drawImage(imgs.get("L"),x,y,null);
                 break;
             case LU:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y);
+                g.drawImage(imgs.get("LU"),x,y,null);
                 break;
             case U:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH / 2, y);
+                g.drawImage(imgs.get("U"),x,y,null);
                 break;
             case RU:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + WIDTH, y);
+                g.drawImage(imgs.get("RU"),x,y,null);
                 break;
             case R:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + WIDTH, y + Tank.HEIGHT / 2);
+                g.drawImage(imgs.get("R"),x,y,null);
                 break;
             case RD:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + WIDTH, y + Tank.HEIGHT);
+                g.drawImage(imgs.get("RD"),x,y,null);
                 break;
             case D:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + WIDTH / 2, y + Tank.HEIGHT);
+                g.drawImage(imgs.get("D"),x,y,null);
                 break;
             case LD:
-                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y + Tank.HEIGHT);
+                g.drawImage(imgs.get("LD"),x,y,null);
                 break;
         }
         move();
