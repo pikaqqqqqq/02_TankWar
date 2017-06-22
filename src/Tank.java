@@ -25,7 +25,7 @@ public class Tank {
 
     private static Random r = new Random();//1.9随机数产生器
 
-    enum Direction {L, LU, U, RU, R, RD, D, LD, STOP}//枚举类型
+    //enum Direction {L, LU, U, RU, R, RD, D, LD, STOP}//枚举类型
 
     private Direction dir = Direction.STOP;
     private Direction ptDir = Direction.D;
