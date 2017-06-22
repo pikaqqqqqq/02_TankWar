@@ -15,6 +15,11 @@ import java.awt.*;
  * 这是非常非常常用的一种方式，所以一定得记住
  */
 
+/**为什么第一个爆炸显示不出来？
+ * 设计模式：虚代理模式
+ * 采用了异步的io所以在图片还没有放到内存中的时候，程序就开始往下执行了
+ */
+
 //1.7.1根据面向对象的思维，爆炸也应该是一个类，同时也会持有TankClient的引用
 public class Explode {
     private int x;
@@ -22,6 +27,8 @@ public class Explode {
     private boolean live = true;
 
     private static Toolkit tk = Toolkit.getDefaultToolkit();
+
+    private boolean init = false;
 
     private static Image[] imgs = {
             tk.getImage(Explode.class.getClassLoader().getResource("images/1.jpg")),
@@ -47,6 +54,13 @@ public class Explode {
     }
 
     public void draw(Graphics g){
+        if(!init){
+            for (int i = 0;i < imgs.length;i++){
+                g.drawImage(imgs[i],-100,-100,null);
+            }
+            init = true;
+        }
+
         if(!live) {
             tc.explodes.remove(this);
             return;
