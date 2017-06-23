@@ -18,6 +18,8 @@ public class TankClient extends Frame {
     List<Explode> explodes = new ArrayList<Explode>();
     List<Tank> tanks = new ArrayList<Tank>();
 
+    NetClient nc = new NetClient();
+
     public static final int GAME_HEIGHT = 600;
     public static final int GAME_WIDTH = 800;
 
@@ -80,9 +82,9 @@ public class TankClient extends Frame {
     public void launchFrame() {
 
         //1.8窗口显示出来以前，添加敌方坦克
-        for (int i = 0; i < 10; i++) {
-            tanks.add(new Tank(100 + 50 * (i + 1), 90, false, Direction.D, this));
-        }
+//        for (int i = 0; i < 10; i++) {
+//            tanks.add(new Tank(100 + 50 * (i + 1), 90, false, Direction.D, this));
+//        }
 
         setLocation(200, 100);
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -99,6 +101,8 @@ public class TankClient extends Frame {
         setVisible(true);
         new Thread(new PaintTread()).start();
         this.addKeyListener(new KeyMonitor());
+
+        nc.connect("127.0.0.1", TankServer.TCP_PORT);
     }
 
     //0.4电影怎么动的，就模拟怎么动
