@@ -37,6 +37,8 @@ public class Tank {
 
     private int step = r.nextInt(12) + 3;
 
+    private int ID;
+
     public Tank(int x, int y, boolean good) {
         this.x = x;
         this.y = y;
@@ -258,5 +260,13 @@ public class Tank {
 
     public boolean isGood() {
         return good;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

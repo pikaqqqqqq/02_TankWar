@@ -18,7 +18,7 @@ public class TankClient extends Frame {
     List<Explode> explodes = new ArrayList<Explode>();
     List<Tank> tanks = new ArrayList<Tank>();
 
-    NetClient nc = new NetClient();
+    NetClient nc = new NetClient(this);
 
     public static final int GAME_HEIGHT = 600;
     public static final int GAME_WIDTH = 800;
@@ -33,6 +33,7 @@ public class TankClient extends Frame {
         g.drawString("missiles.size():" + missiles.size(), 10, 50);//1.3如何在界面上画字符串
         g.drawString("explodes.size():" + explodes.size(), 10, 70);
         g.drawString("tanks.size():" + tanks.size(), 10, 90);
+        g.drawString("myTank.getID():" + myTank.getID(), 10, 110);
         g.setColor(c);//不要改变原来的前景色
 
         for (int i = 0; i < missiles.size(); i++) {
