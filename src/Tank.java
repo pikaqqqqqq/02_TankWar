@@ -64,6 +64,7 @@ public class Tank {
         Color c = g.getColor();
         if (good) g.setColor(Color.RED);
         else g.setColor(Color.white);
+        g.drawString("id:" + ID, x, y - 10);
         g.fillOval(x, y, WIDTH, HEIGHT);//x,y,w,h
         g.setColor(c);//不要改变原来的前景色
 

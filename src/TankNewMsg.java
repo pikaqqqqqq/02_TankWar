@@ -17,15 +17,15 @@ import java.net.SocketException;
 
 public class TankNewMsg {
     Tank tank = null;
-    TankClient tc;
+    TankClient tc; //学了设计模式还会有比持有对方引用更好的办法
 
     public TankNewMsg(Tank tank, TankClient tc) {
         this.tank = tank;
         this.tc = tc;
     }
 
-    public TankNewMsg() {
-
+    public TankNewMsg(TankClient tc) {
+        this.tc = tc;
     }
 
     public void send(DatagramSocket ds, String IP, int udpPort) {
@@ -57,11 +57,15 @@ public class TankNewMsg {
 
         try {
             int id = dis.readInt();
+            if (tc.myTank.getID() == id) return;
             int x = dis.readInt();
             int y = dis.readInt();
             Direction dir = Direction.values()[dis.readInt()];
             boolean good = dis.readBoolean();
-            System.out.println(id + " " + x + " " + y + " " + dir + " " + good);
+            //System.out.println(id + " " + x + " " + y + " " + dir + " " + good);
+            Tank t = new Tank(x, y, good, dir, tc);
+            t.setID(id);
+            tc.tanks.add(t);
         } catch (IOException e) {
             e.printStackTrace();
         }

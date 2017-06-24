@@ -19,7 +19,7 @@ public class NetClient {
      * 自己生成ID
      * 是否需要写synchronized 给id上锁，如果像chat那样接收客户端就需要
      */
-    private static int UDP_PORT_START = 2223;
+    private static int UDP_PORT_START = 2224;
     private int udpPort;
 
     private TankClient tc;
@@ -92,7 +92,7 @@ public class NetClient {
         private void parse(DatagramPacket dp) {
             ByteArrayInputStream bais = new ByteArrayInputStream(buf, 0, dp.getLength());
             DataInputStream dis = new DataInputStream(bais);
-            TankNewMsg msg = new TankNewMsg();
+            TankNewMsg msg = new TankNewMsg(NetClient.this.tc);//1.9.4_3在一个内部类里访问封装类的对象，直接写tc也可以
             msg.parse(dis);
 
         }
