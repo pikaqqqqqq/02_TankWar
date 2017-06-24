@@ -15,7 +15,10 @@ import java.net.SocketException;
  */
 
 
-public class TankNewMsg {
+public class TankNewMsg implements Msg{
+
+    int msgType = Msg.TANK_NEW_MSG;
+
     Tank tank = null;
     TankClient tc; //学了设计模式还会有比持有对方引用更好的办法
 
@@ -33,6 +36,7 @@ public class TankNewMsg {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
         try {
+            dos.writeInt(msgType);
             dos.writeInt(tank.getID());
             dos.writeInt(tank.x);
             dos.writeInt(tank.y);

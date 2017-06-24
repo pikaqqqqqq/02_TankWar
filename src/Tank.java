@@ -196,7 +196,7 @@ public class Tank {
     }
 
     public Missile fire() {
-        if(!live) return null;
+        if (!live) return null;
         int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
         int y = this.y + Tank.HEIGHT / 2 - Missile.WIDTH / 2;
         Missile m = new Missile(x, y, good, ptDir, tc);
@@ -225,6 +225,8 @@ public class Tank {
     }
 
     public void locateDirection() {
+        Direction oldDir = this.dir;
+
         if (bL && !bU && !bR && !bD) {
             dir = Direction.L;
         } else if (bL && bU && !bR && !bD) {
@@ -244,7 +246,10 @@ public class Tank {
         } else if (!bL && !bU && !bR && !bD) {
             dir = Direction.STOP;
         }
-
+        if (dir != oldDir) {
+            TankMoveMsg msg = new TankMoveMsg(ID, dir, tc);
+            tc.nc.send(msg);
+        }
     }
 
     public Rectangle getRect() {
