@@ -33,4 +33,4 @@ repaint()：
 * 0.6如果是八方向移动怎么写
 * 1.1什么是持有对方引用？？
 * 1.9.4_2 udp环路（数据发送与解析）
-  
+  ![image](https://github.com/pikaqqqqqq/02_TankWar/blob/TankWar1.9.4_2/note/TankWar1.9.4_2udp%E6%95%B0%E6%8D%AE%E5%8F%91%E9%80%81%E4%B8%8E%E8%A7%A3%E6%9E%90.jpg)
