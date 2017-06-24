@@ -1,8 +1,7 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +15,13 @@ public class TankServer {
      */
     private static int ID = 100;
     public static final int TCP_PORT = 8888;
+    public static final int UDP_PORT = 6666;
     List<Client> clients = new ArrayList<Client>();
 
     public void start() {
+
+        new Thread(new UDPThread()).start();
+
         ServerSocket ss = null;
         try {
             ss = new ServerSocket(TCP_PORT);
@@ -54,7 +57,6 @@ public class TankServer {
                 }
             }
         }
-
     }
 
     private class Client {
@@ -64,6 +66,32 @@ public class TankServer {
         public Client(String IP, int udpPort) {
             this.IP = IP;
             this.udpPort = udpPort;
+        }
+    }
+
+    private class UDPThread implements Runnable {
+
+        byte[] buf = new byte[1024];
+
+        @Override
+        public void run() {
+            DatagramSocket ds = null;
+            try {
+                ds = new DatagramSocket(UDP_PORT);
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
+            System.out.println("UDP thread start at:" + UDP_PORT);
+            //接收udp数据
+            while (ds != null) {
+                DatagramPacket dp = new DatagramPacket(buf, buf.length);
+                try {
+                    ds.receive(dp);
+                    System.out.println("a packet recevive!");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

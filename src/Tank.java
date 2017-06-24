@@ -20,14 +20,14 @@ public class Tank {
 
     private boolean live = true;
 
-    private int x;
-    private int y;
+    int x;
+    int y;
 
     private static Random r = new Random();//1.9随机数产生器
 
     //enum Direction {L, LU, U, RU, R, RD, D, LD, STOP}//枚举类型
 
-    private Direction dir = Direction.STOP;
+    Direction dir = Direction.STOP;
     private Direction ptDir = Direction.D;
 
     private boolean bL = false;
