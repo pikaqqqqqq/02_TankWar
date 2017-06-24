@@ -1,6 +1,8 @@
+import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -59,10 +61,41 @@ public class NetClient {
 
         TankNewMsg msg = new TankNewMsg(tc.myTank, tc);
         send(msg);
+
+        new Thread(new UDPRecvThread()).start();
     }
 
     public void send(TankNewMsg msg) {
         msg.send(ds, "127.0.0.1", TankServer.UDP_PORT);
+    }
+
+    private class UDPRecvThread implements Runnable {
+
+        byte[] buf = new byte[1024];
+
+        @Override
+        public void run() {
+            while (ds != null) {
+
+                DatagramPacket dp = new DatagramPacket(buf, buf.length);
+                try {
+                    ds.receive(dp);
+                    System.out.println("a packet recevive from server!");
+                    parse(dp);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+        private void parse(DatagramPacket dp) {
+            ByteArrayInputStream bais = new ByteArrayInputStream(buf, 0, dp.getLength());
+            DataInputStream dis = new DataInputStream(bais);
+            TankNewMsg msg = new TankNewMsg();
+            msg.parse(dis);
+
+        }
     }
 
 }

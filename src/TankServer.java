@@ -87,6 +87,11 @@ public class TankServer {
                 DatagramPacket dp = new DatagramPacket(buf, buf.length);
                 try {
                     ds.receive(dp);
+                    for (int i = 0; i < clients.size(); i++) {
+                        Client c = clients.get(i);
+                        dp.setSocketAddress(new InetSocketAddress(c.IP, c.udpPort));
+                        ds.send(dp);
+                    }
                     System.out.println("a packet recevive!");
                 } catch (IOException e) {
                     e.printStackTrace();

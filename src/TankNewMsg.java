@@ -1,4 +1,5 @@
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -9,6 +10,8 @@ import java.net.SocketException;
 /**
  * Created by think on 2017/6/24.
  * 1.9.4_1 发送和解析udp数据
+ * 1.9.4 怎么用多态来封装这些个msg
+ * 1.9.4_2 udp环路（数据发送与解析）
  */
 
 
@@ -19,6 +22,10 @@ public class TankNewMsg {
     public TankNewMsg(Tank tank, TankClient tc) {
         this.tank = tank;
         this.tc = tc;
+    }
+
+    public TankNewMsg() {
+
     }
 
     public void send(DatagramSocket ds, String IP, int udpPort) {
@@ -41,6 +48,20 @@ public class TankNewMsg {
             ds.send(dp);
         } catch (SocketException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void parse(DataInputStream dis) {
+
+        try {
+            int id = dis.readInt();
+            int x = dis.readInt();
+            int y = dis.readInt();
+            Direction dir = Direction.values()[dis.readInt()];
+            boolean good = dis.readBoolean();
+            System.out.println(id + " " + x + " " + y + " " + dir + " " + good);
         } catch (IOException e) {
             e.printStackTrace();
         }
