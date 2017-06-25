@@ -15,7 +15,7 @@ import java.net.SocketException;
  */
 
 
-public class TankNewMsg implements Msg{
+public class TankNewMsg implements Msg {
 
     int msgType = Msg.TANK_NEW_MSG;
 
@@ -67,9 +67,22 @@ public class TankNewMsg implements Msg{
             Direction dir = Direction.values()[dis.readInt()];
             boolean good = dis.readBoolean();
             //System.out.println(id + " " + x + " " + y + " " + dir + " " + good);
-            Tank t = new Tank(x, y, good, dir, tc);
-            t.setID(id);
-            tc.tanks.add(t);
+            boolean exit = false;
+            for (int i = 0; i < tc.tanks.size(); i++) {
+                if (id == tc.tanks.get(i).getID()) {
+                    exit = true;
+                    break;
+                }
+            }
+            if (!exit) {
+                TankNewMsg tnMsg = new TankNewMsg(tc.myTank, tc);
+                tc.nc.send(tnMsg);
+                Tank t = new Tank(x, y, good, dir, tc);
+                t.setID(id);
+                tc.tanks.add(t);
+            }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
