@@ -68,6 +68,7 @@ public class NetClient {
 
     /**
      * @param msg 多态：继承，重写，父类引用指向子类对象
+     *            多态的使用
      */
     public void send(Msg msg) {
         //public void send(TankNewMsg msg) {
@@ -105,6 +106,7 @@ public class NetClient {
             }
             /**
              * 1.9.5父类引用指向子类对象
+             * 对多态的使用！！！
              */
             Msg msg = null;
             switch (msgType) {
