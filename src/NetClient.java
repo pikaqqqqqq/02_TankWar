@@ -19,7 +19,6 @@ public class NetClient {
      * 自己生成ID
      * 是否需要写synchronized 给id上锁，如果像chat那样接收客户端就需要
      */
-    private static int UDP_PORT_START = 2226;
     private int udpPort;
 
     private TankClient tc;
@@ -28,16 +27,16 @@ public class NetClient {
     DatagramSocket ds = null;
 
     public NetClient(TankClient tc) {
-        this.udpPort = UDP_PORT_START++;
         this.tc = tc;
+
+    }
+
+    public void connect(String IP, int port) {
         try {
             ds = new DatagramSocket(udpPort);
         } catch (SocketException e) {
             e.printStackTrace();
         }
-    }
-
-    public void connect(String IP, int port) {
         try {
             s = new Socket(IP, port);
             DataOutputStream dos = new DataOutputStream(s.getOutputStream());
@@ -73,6 +72,14 @@ public class NetClient {
     public void send(Msg msg) {
         //public void send(TankNewMsg msg) {
         msg.send(ds, "127.0.0.1", TankServer.UDP_PORT);
+    }
+
+    public int getUdpPort() {
+        return udpPort;
+    }
+
+    public void setUdpPort(int udpPort) {
+        this.udpPort = udpPort;
     }
 
     private class UDPRecvThread implements Runnable {
@@ -122,9 +129,6 @@ public class NetClient {
                     msg.parse(dis);
                     break;
             }
-
-
         }
     }
-
 }

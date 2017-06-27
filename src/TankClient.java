@@ -1,8 +1,5 @@
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +16,7 @@ public class TankClient extends Frame {
     List<Tank> tanks = new ArrayList<Tank>();
 
     NetClient nc = new NetClient(this);
+    ConnDialog cd = new ConnDialog();
 
     public static final int GAME_HEIGHT = 600;
     public static final int GAME_WIDTH = 800;
@@ -103,7 +101,7 @@ public class TankClient extends Frame {
         new Thread(new PaintTread()).start();
         this.addKeyListener(new KeyMonitor());
 
-        nc.connect("127.0.0.1", TankServer.TCP_PORT);
+        //nc.connect("127.0.0.1", TankServer.TCP_PORT);
     }
 
     //0.4电影怎么动的，就模拟怎么动
@@ -128,7 +126,13 @@ public class TankClient extends Frame {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            myTank.KeyPressed(e);
+            if (e.getKeyCode() == KeyEvent.VK_C) {
+                cd.setVisible(true);
+            } else {
+                myTank.KeyPressed(e);
+            }
+
+
         }
 
         @Override
@@ -136,6 +140,44 @@ public class TankClient extends Frame {
             myTank.KeyReleased(e);
         }
 
+    }
+
+    private class ConnDialog extends Dialog {
+        TextField tfIP = new TextField("127.0.0.1", 12);
+        TextField tfPort = new TextField(TankServer.TCP_PORT + "", 6);
+        TextField tfMyUDPPort = new TextField("2223", 6);
+        Button btnConfirm = new Button("确定");
+
+        public ConnDialog() {
+            super(TankClient.this, true);
+
+            this.setLayout(new FlowLayout());
+            add(new Label("IP:"));
+            add(tfIP);
+            add(new Label("Port:"));
+            add(tfPort);
+            add(new Label("MyUDPPort:"));
+            add(tfMyUDPPort);
+            add(btnConfirm);
+            setLocation(300, 300);
+            this.pack();
+            addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    setVisible(false);
+                }
+            });
+            btnConfirm.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String IP = tfIP.getText().trim();
+                    int port = Integer.parseInt(tfPort.getText().trim());
+                    int myUDPPort = Integer.parseInt(tfMyUDPPort.getText().trim());
+                    nc.setUdpPort(myUDPPort);
+                    nc.connect(IP, port);
+                }
+            });
+        }
     }
 
     //0.7增加100辆坦克到游戏中
