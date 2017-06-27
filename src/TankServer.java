@@ -37,10 +37,11 @@ public class TankServer {
                 String IP = s.getInetAddress().getHostAddress();
                 DataInputStream dis = new DataInputStream(s.getInputStream());
                 int udpPort = dis.readInt();
+                int clientID = ID++;
                 Client client = new Client(IP, udpPort);
                 clients.add(client);
                 DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-                dos.writeInt(ID++);//1.9.3_2是否需要写synchronized 给id上锁，如果像chat那样接收客户端就需要
+                dos.writeInt(clientID);//1.9.3_2是否需要写synchronized 给id上锁，如果像chat那样接收客户端就需要
                 System.out.println("a client connect! Addr:" + s.getInetAddress().getHostAddress() + ":" + s.getPort() +
                         "-------UPD Port:" + udpPort);
 

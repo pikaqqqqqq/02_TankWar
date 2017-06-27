@@ -19,7 +19,7 @@ public class NetClient {
      * 自己生成ID
      * 是否需要写synchronized 给id上锁，如果像chat那样接收客户端就需要
      */
-    private static int UDP_PORT_START = 2226;
+    private static int UDP_PORT_START = 2225;
     private int udpPort;
 
     private TankClient tc;
@@ -86,6 +86,7 @@ public class NetClient {
                 DatagramPacket dp = new DatagramPacket(buf, buf.length);
                 try {
                     ds.receive(dp);
+
 
                     parse(dp);
                 } catch (IOException e) {
