@@ -46,6 +46,12 @@ public class NetClient {
             int ID = dis.readInt();
             System.out.println("connect to server!and get an ID:" + ID);
             tc.myTank.setID(ID);
+            if(ID%2 == 0){
+                tc.myTank.setGood(false);
+            }else {
+                tc.myTank.setGood(true);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -141,6 +147,11 @@ public class NetClient {
                 case Msg.MISSILE_NEW_MSG:
                     System.out.println("a MISSILE_NEW_MSG packet receive from server!");
                     msg = new MissileNewMsg(NetClient.this.tc);
+                    msg.parse(dis);
+                    break;
+                case Msg.TANK_DEAD_MSG:
+                    System.out.println("a TANK_DEAD_MSG packet receive from server!");
+                    msg = new TankDeadMsg(NetClient.this.tc);
                     msg.parse(dis);
                     break;
 

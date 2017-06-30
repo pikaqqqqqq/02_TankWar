@@ -96,7 +96,7 @@ public class Tank {
         }
         move();
 
-        if (!good) {
+        /*if (!good) {
             Direction[] dirs = Direction.values();
             if (step == 0) {
                 //1.9.2让坦克移动随机的距离
@@ -108,8 +108,7 @@ public class Tank {
             if (r.nextInt(40) > 37) {
                 this.fire();
             }
-
-        }
+        }*/
     }
 
     public void move() {
@@ -278,5 +277,9 @@ public class Tank {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public void setGood(boolean b) {
+        good = b;
     }
 }

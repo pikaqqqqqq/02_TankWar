@@ -69,13 +69,15 @@ public class TankNewMsg implements Msg {
             boolean good = dis.readBoolean();
             //System.out.println(id + " " + x + " " + y + " " + dir + " " + good);
             boolean exit = false;
+            boolean live = false;
             for (int i = 0; i < tc.tanks.size(); i++) {
                 if (id == tc.tanks.get(i).getID()) {
                     exit = true;
+                    live = tc.tanks.get(i).isLive();
                     break;
                 }
             }
-            if (!exit) {
+            if (!exit && live) {
                 TankNewMsg tnMsg = new TankNewMsg(tc.myTank, tc);
                 tc.nc.send(tnMsg);
                 Tank t = new Tank(x, y, good, dir, tc);
