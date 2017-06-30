@@ -45,6 +45,7 @@ public class TankNewMsg implements Msg {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         byte[] buf = baos.toByteArray();
         DatagramPacket dp;
         try {

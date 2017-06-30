@@ -23,6 +23,7 @@ public class NetClient {
 
     private TankClient tc;
     private Socket s = null;
+    private boolean connection = false;
 
     DatagramSocket ds = null;
 
@@ -58,6 +59,8 @@ public class NetClient {
             }
         }
 
+        connection = true;
+
         TankNewMsg msg = new TankNewMsg(tc.myTank, tc);
         send(msg);
 
@@ -72,6 +75,14 @@ public class NetClient {
     public void send(Msg msg) {
         //public void send(TankNewMsg msg) {
         msg.send(ds, "127.0.0.1", TankServer.UDP_PORT);
+    }
+
+    public boolean isConnection() {
+        return connection;
+    }
+
+    public void setConnection(boolean connection) {
+        this.connection = connection;
     }
 
     public int getUdpPort() {
@@ -119,7 +130,6 @@ public class NetClient {
             switch (msgType) {
                 case Msg.TANK_NEW_MSG:
                     System.out.println("a TANK_NEW_MSG packet receive from server!");
-
                     msg = new TankNewMsg(NetClient.this.tc);//1.9.4_3在一个内部类里访问封装类的对象，直接写tc也可以
                     msg.parse(dis);
                     break;
@@ -128,6 +138,12 @@ public class NetClient {
                     msg = new TankMoveMsg(NetClient.this.tc);
                     msg.parse(dis);
                     break;
+                case Msg.MISSILE_NEW_MSG:
+                    System.out.println("a MISSILE_NEW_MSG packet receive from server!");
+                    msg = new MissileNewMsg(NetClient.this.tc);
+                    msg.parse(dis);
+                    break;
+
             }
         }
     }

@@ -10,7 +10,6 @@ public class TankClient extends Frame {
 
     Tank myTank = new Tank(50, 50, true, Direction.STOP, this);
     //Tank enemyTank = new Tank(100, 100, false, this);
-    Explode e = new Explode(70, 90, this);
     List<Missile> missiles = new ArrayList<Missile>();
     List<Explode> explodes = new ArrayList<Explode>();
     List<Tank> tanks = new ArrayList<Tank>();
@@ -131,8 +130,6 @@ public class TankClient extends Frame {
             } else {
                 myTank.KeyPressed(e);
             }
-
-
         }
 
         @Override
@@ -175,6 +172,7 @@ public class TankClient extends Frame {
                     int myUDPPort = Integer.parseInt(tfMyUDPPort.getText().trim());
                     nc.setUdpPort(myUDPPort);
                     nc.connect(IP, port);
+                    setVisible(false);
                 }
             });
         }
